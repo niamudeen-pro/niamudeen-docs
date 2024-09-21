@@ -1,17 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import MainLayout from '../components/layout/MainLayout';
-import Dashboard from '../pages/DashboardPage';
+import HomePage from '../pages/HomePage';
+import AppLayout from '../components/layout/AppLayout';
+import Sidebar from '../pages/components/Sidebar';
 
 export const ALL_ROUTES = [
     {
         id: 1,
         path: '/',
-        element: (
-            <MainLayout>
-                <Dashboard />
-            </MainLayout>
-        ),
+        element: <HomePage />,
+    },
+    {
+        id: 2,
+        path: '/components/sidebar',
+        element: <Sidebar/>,
     },
 ];
 
@@ -28,6 +30,7 @@ export const PUBLIC_ROUTES =
 export const _router = createBrowserRouter([
     {
         path: '',
+        element: <AppLayout />,
         children: ALL_ROUTES,
     },
 ]);

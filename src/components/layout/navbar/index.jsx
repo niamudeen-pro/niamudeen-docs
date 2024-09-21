@@ -1,65 +1,120 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LuSun } from 'react-icons/lu';
+import { FiMoon } from 'react-icons/fi';
+import { BRAND_NAME } from '../../../constants';
+import { FaDesktop } from 'react-icons/fa';
+import { HiOutlineMenuAlt2 } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { toggleSidebar } from '../../../store/features/sidebarSlice';
 
-import useWindowSize from '../../../hooks/useWindowSize';
-
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../../routes';
-
-import useAuth from '../../../hooks/useAuth';
-import { NavLinks } from './NavLinks';
-import NavToggleButton from './NavToggle';
 
 export default function Navbar() {
-    const { isLoggedIn, handleLogout } = useAuth();
-    const [isNavOpen, setIsNavOpen] = useState(false);
-    const windowSize = useWindowSize();
+    const dispatch = useDispatch()
 
-    const toggle = () => {
-        setIsNavOpen((prev) => !prev);
-    };
-
-    useEffect(() => {
-        if (windowSize.width > 1280) {
-            setIsNavOpen(false);
-        }
-    }, [windowSize.width]);
-
-    const NAV_MEUS = isLoggedIn ? PRIVATE_ROUTES : PUBLIC_ROUTES;
+    const handleSidebarToggle = () => {
+        dispatch(toggleSidebar())
+    }
 
     return (
-        <header className="shadow-sm sticky top-0 z-50 bg-white">
-            <div className="custom_container flex_between h-20">
+        <header className="sticky top-0 z-50 bg-background">
+            <div className="flex_between h-20">
                 <Link to="/">
-                    <p>React Best Practices</p>
+                    <div className="text-primary flex items-center gap-4 text-xl">
+                            <HiOutlineMenuAlt2   onClick={handleSidebarToggle}/>
+                        <p className="text-xl">{BRAND_NAME}</p>
+                    </div>
                 </Link>
-                <nav
-                    className={`hidden lg:block ${
-                        isNavOpen &&
-                        '!flex fixed top-0 left-0 w-full h-full z-50 flex_center bg-white'
-                    }`}
-                >
-                    <ul
-                        className={`flex_center gap-4 capitalize ${
-                            isNavOpen ? 'flex-col' : ''
-                        }`}
-                    >
-                        {NAV_MEUS?.map((route) => (
-                            <NavLinks
-                                key={route.id}
-                                route={route}
-                                setIsNavOpen={setIsNavOpen}
-                            />
-                        ))}
 
-                        {isLoggedIn && (
-                            <button className="grayBtn" onClick={handleLogout}>
-                                Logout
-                            </button>
-                        )}
-                    </ul>
-                </nav>
-                <NavToggleButton isNavOpen={isNavOpen} toggle={toggle} />
+                <ThemeDropdown />
             </div>
         </header>
     );
 }
+
+const THEME_OPTIONS = [
+    {
+        id: 1,
+        title: 'System',
+        value: 'system',
+        icon: <FaDesktop />,
+    },
+
+    {
+        id: 2,
+        title: 'Light',
+        value: 'light',
+        icon: <LuSun />,
+    },
+
+    {
+        id: 3,
+        title: 'Dark',
+        value: 'dark',
+        icon: <FiMoon />,
+    },
+];
+
+const ThemeDropdown = () => {
+    const [theme, setTheme] = useState('system');
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    useEffect(() => {
+        const root = window.document.documentElement;
+        console.log('root: ', root);
+        if (theme === 'dark') {
+            root.classList.add('dark');
+            root.classList.remove('light');
+        } else if (theme === 'light') {
+            root.classList.add('light');
+            root.classList.remove('dark');
+        } else {
+            const prefersDark = window.matchMedia(
+                '(prefers-color-scheme: dark)',
+            ).matches;
+            if (prefersDark) {
+                root.classList.add('dark');
+                root.classList.remove('light');
+            } else {
+                root.classList.add('light');
+                root.classList.remove('dark');
+            }
+        }
+    }, [theme]);
+
+    const handleSetCurrentTheme = (value) => {
+        setTheme(value);
+        setShowDropdown(false);
+    };
+
+    const THEME_ICON = THEME_OPTIONS?.find(
+        (option) => option.value === theme,
+    ).icon;
+    return (
+        <div className="relative inline-block text-left">
+            <div
+                className="bg-primary text-primary-foreground cursor-pointer rounded-md border-gray-50 p-2"
+                onClick={() => setShowDropdown(!showDropdown)}
+            >
+                {THEME_ICON}
+            </div>
+            {showDropdown && (
+                <div className="absolute right-0 mt-2 w-40 origin-top-right rounded-md shadow-lg bg-white dark:bg-black z-50">
+                    <div className="p-2" role="none">
+                        {THEME_OPTIONS?.map((option) => (
+                            <button
+                                key={option.id}
+                                onClick={() =>
+                                    handleSetCurrentTheme(option.value)
+                                }
+                                className="dark:hover:bg-background group flex w-full items-center rounded-md px-4 py-2 text-sm hover:bg-gray-100"
+                            >
+                                {option.title}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};

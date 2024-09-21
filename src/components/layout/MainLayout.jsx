@@ -1,196 +1,102 @@
-import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
 
-import { IoClose } from 'react-icons/io5';
-import { RxDashboard } from 'react-icons/rx';
-import { GoGift } from 'react-icons/go';
-import { ImFilesEmpty } from 'react-icons/im';
-import { IoSettingsOutline } from 'react-icons/io5';
-import { RiMenuFill } from 'react-icons/ri';
-import { AnimatePresence, motion } from 'framer-motion';
-import { AiOutlineLogout } from 'react-icons/ai';
-const NAVIGATION_MENUS = [
+const navItems = [
     {
-        id: 1,
-        title: 'Dashboard',
-        icon: <RxDashboard size={22} />,
-    },
-
-    {
-        id: 2,
-        title: 'Products',
-        icon: <GoGift size={22} />,
-    },
-
-    {
-        id: 3,
-        title: 'Pages',
-        icon: <ImFilesEmpty size={22} />,
+        title: 'Getting Started',
+        links: [
+            { href: '#', text: 'Introduction' },
+            { href: '#', text: 'Installation' },
+        ],
     },
     {
-        id: 4,
-        title: 'Settings',
-        icon: <IoSettingsOutline size={22} />,
+        title: 'Components',
+        links: [{ href: '/components/sidebar', text: 'Sidebar' }],
     },
 ];
 
-export default function MainLayout({ children }) {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+export default function MainLayout({children}) {
 
-    const showAnimation = {
-        hidden: {
-            width: 0,
-            opacity: 0,
-            transition: {
-                duration: 0.5,
-            },
-        },
-        show: {
-            opacity: 1,
-            width: 'auto',
-            transition: {
-                duration: 0.5,
-            },
-        },
-    };
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setIsSidebarOpen(false);
-            } else {
-                setIsSidebarOpen(true);
-            }
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [window.innerWidth]);
-
-    const BASE_COLOR = 'bg-blue-600';
-    const ACTIVE_BG_COLOR = 'bg-white';
-    const ACTIVE_TEXT_COLOR = 'text-black';
-    // const DEFAULT_BG_COLOR = 'bg-white';
-    const DEFAULT_TEXT_COLOR = 'text-white';
+    const isSidebarOpen = useSelector(state=>state.sidebar.isOpened)
+  
 
     return (
-        <section className={`flex ${DEFAULT_TEXT_COLOR}`}>
-            <aside className={`p-5 ${BASE_COLOR} min-h-screen`}>
-                <motion.div
-                    animate={{
-                        width: isSidebarOpen ? '250px' : '60px',
-                        transition: {
-                            duration: 0.5,
-                            type: 'spring',
-                            damping: 10,
-                        },
-                    }}
-                    className="relative  h-full"
-                >
-                    <div className="flex justify-between items-center">
-                        <div
-                            className={`py-3 px-4 rounded-md   ${ACTIVE_BG_COLOR} ${ACTIVE_TEXT_COLOR}`}
-                        >
-                            <RiMenuFill
-                                size={22}
-                                className="cursor-pointer"
-                                onClick={() =>
-                                    setIsSidebarOpen((prev) => !prev)
-                                }
-                            />
+        <div className="flex flex-col md:flex-row min-h-[90vh]">
+         
+            <aside
+                className={classNames(
+                    'bg-background p-4 md:p-0 top-20 md:top-0 md:block fixed inset-y-0 left-0 z-50 w-64 translate-x-0 transform overflow-y-auto  transition duration-200 ease-in-out md:relative md:translate-x-0 md:dark:bg-transparent',
+                    { 'hidden': !isSidebarOpen },
+                )}
+            >
+           
+                <nav>
+                    {navItems.map((section, index) => (
+                        <div key={index} className="mb-6">
+                            <h2 className="mb-2 text-base font-medium">
+                                {section.title}
+                            </h2>
+                            <ul>
+                                {section.links.map((link, linkIndex) => (
+                                    <li key={linkIndex} className="mb-1">
+                                        <Link
+                                            to={link.href}
+                                            className="text-muted-foreground hover:text-primary text-sm transition-colors hover:underline"
+                                        >
+                                            {link.text}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        {isSidebarOpen && (
-                            <>
-                                <AnimatePresence>
-                                    <motion.p
-                                        variants={showAnimation}
-                                        initial="hidden"
-                                        animate="show"
-                                        exit="hidden"
-                                        className="uppercase text-xl font-semibold"
-                                    >
-                                        brand
-                                    </motion.p>
-                                </AnimatePresence>
-                                <div>
-                                    <IoClose
-                                        size={24}
-                                        className="cursor-pointer"
-                                        onClick={() =>
-                                            setIsSidebarOpen((prev) => !prev)
-                                        }
-                                    />
-                                </div>
-                            </>
-                        )}
-                    </div>
-
-                    {/* sidebar navigation menu **************************************************** */}
-
-                    <nav className="mt-10 ">
-                        <ul className={'space-y-8'}>
-                            {NAVIGATION_MENUS?.map((menu) => (
-                                <li
-                                    key={menu.id}
-                                    className={classNames(
-                                        `relative group flex gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300   hover:${ACTIVE_BG_COLOR} hover:${ACTIVE_TEXT_COLOR}`,
-                                        {
-                                            'justify-center': !isSidebarOpen,
-                                        }
-                                    )}
-                                >
-                                    <div>{menu.icon}</div>
-                                    {isSidebarOpen && (
-                                        <AnimatePresence>
-                                            <motion.p
-                                                variants={showAnimation}
-                                                initial="hidden"
-                                                animate="show"
-                                                exit="hidden"
-                                            >
-                                                {menu.title}
-                                            </motion.p>
-                                        </AnimatePresence>
-                                    )}
-
-                                    {!isSidebarOpen && (
-                                        <p className="absolute left-[150%] top-1/2 transform -translate-y-1/2 whitespace-nowrap bg-gray-700 text-white px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            {menu.title}
-                                        </p>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                    <div
-                        className={classNames(
-                            `flex  gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300   hover:${ACTIVE_BG_COLOR} hover:${ACTIVE_TEXT_COLOR}  absolute bottom-0 w-full`,
-                            {
-                                'justify-center': !isSidebarOpen,
-                            }
-                        )}
-                    >
-                        <AiOutlineLogout size={22} />
-                        {isSidebarOpen && (
-                            <AnimatePresence>
-                                <motion.p
-                                    variants={showAnimation}
-                                    initial="hidden"
-                                    animate="show"
-                                    exit="hidden"
-                                >
-                                    Logout
-                                </motion.p>
-                            </AnimatePresence>
-                        )}
-                    </div>
-                </motion.div>
+                    ))}
+                </nav>
             </aside>
 
-            <div className="text-black flex-1 min-h-screen p-5 bg-gray-50">
+            {/* Main content */}
+            <main className="hide_scrollbar sectionCustomHeight w-full flex-1  p-4 md:p-8  bg-gray-50 dark:bg-transparent">
                 {children}
-            </div>
-        </section>
+                {/* <h1 className="mb-2 text-3xl font-bold">{title}</h1>
+                <p className="text-muted-foreground mb-6 text-sm">
+                    {description}
+                </p> */}
+
+                {/* <div className="mb-4">
+                    <button
+                        className={`mr-4 pb-2 ${
+                            activeTab === 'preview'
+                                ? 'border-primary border-b-2 font-semibold'
+                                : 'text-muted-foreground'
+                        }`}
+                        onClick={() => setActiveTab('preview')}
+                    >
+                        Preview
+                    </button>
+                    <button
+                        className={`pb-2 ${
+                            activeTab === 'code'
+                                ? 'border-primary border-b-2 font-semibold'
+                                : 'text-muted-foreground'
+                        }`}
+                        onClick={() => setActiveTab('code')}
+                    >
+                        Code
+                    </button>
+                </div>
+
+                <div className="overflow-hidden rounded-md border">
+                    {activeTab === 'preview' ? (
+                        <div className="sm:p-8">{children}</div>
+                    ) : (
+                        <div className="relative">
+                            <pre className="bg-muted overflow-x-auto rounded-md p-8">
+                                <code className="text-sm">{'codeSnippet'}</code>
+                            </pre>
+                        </div>
+                    )}
+                </div> */}
+            </main>
+        </div>
     );
 }

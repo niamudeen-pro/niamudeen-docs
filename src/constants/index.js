@@ -1,3 +1,5 @@
+export const BRAND_NAME = 'React UI Components';
+
 export const REGEX = {
     EMAIL: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
     PHONE: /^[6-9]\d{9}$/,
