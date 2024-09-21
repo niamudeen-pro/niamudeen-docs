@@ -9,6 +9,9 @@ import { IoSettingsOutline } from 'react-icons/io5';
 import { RiMenuFill } from 'react-icons/ri';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiOutlineLogout } from 'react-icons/ai';
+
+
+
 const NAVIGATION_MENUS = [
     {
         id: 1,
@@ -32,6 +35,7 @@ const NAVIGATION_MENUS = [
         title: 'Settings',
         icon: <IoSettingsOutline size={22} />,
     },
+    
 ];
 
 export default function Sidebar() {
@@ -71,8 +75,10 @@ export default function Sidebar() {
  
 
     return (
-        <section className={`flex text-foreground min-h-[80vh]`}>
-            <aside className={`p-5 bg-background dark:border-border dark:border-2`}>
+        <section className="flex min-h-screen text-white">
+
+            {/* navbar section ******************************** */}
+            <aside className="p-5 bg-orange-500">
                 <motion.div
                     animate={{
                         width: isSidebarOpen ? '250px' : '60px',
@@ -94,16 +100,15 @@ export default function Sidebar() {
                                         initial="hidden"
                                         animate="show"
                                         exit="hidden"
-                                        className="uppercase text-lg font-semibold text-primary"
+                                        className="uppercase text-lg font-semibold text-nowrap"
                                     >
                                         React UI
                                     </motion.p>
                                 </AnimatePresence>
                             </>
                         )}
-
-<div
-                            className="py-3 px-4 rounded-md hover:bg-primary hover:text-white"
+                          <div
+                            className="py-3 px-4 rounded-md hover:bg-white hover:text-black"
                         >
                             {
                                 isSidebarOpen ? 
@@ -136,7 +141,7 @@ export default function Sidebar() {
                                 <li
                                     key={menu.id}
                                     className={classNames(
-                                        `relative group flex gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300  hover:bg-primary hover:text-white`,
+                                        `relative group flex gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300  hover:bg-white hover:text-black`,
                                         {
                                             'justify-center': !isSidebarOpen,
                                         }
@@ -157,7 +162,7 @@ export default function Sidebar() {
                                     )}
 
                                     {!isSidebarOpen && (
-                                        <p className="absolute left-[150%] top-1/2 transform -translate-y-1/2 whitespace-nowrap bg-primary text-white px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <p className="absolute left-[150%] top-1/2 transform -translate-y-1/2 whitespace-nowrap bg-orange-500 text-white px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             {menu.title}
                                         </p>
                                     )}
@@ -167,7 +172,7 @@ export default function Sidebar() {
                     </nav>
                     <div
                         className={classNames(
-                            `flex  gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300    absolute bottom-0 w-full hover:bg-primary hover:text-white`,
+                            `flex  gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300    absolute bottom-0 w-full hover:bg-white hover:text-black`,
                             {
                                 'justify-center': !isSidebarOpen,
                             }
