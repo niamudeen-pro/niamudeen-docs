@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import AppLayout from "../components/layout/AppLayout";
 import Sidebar from "../pages/components/Sidebar";
 import NotificationsComponent from "../pages/components/Notifications";
+import LoaderComponent from "../pages/components/Loader";
 
 export const ALL_ROUTES = [
   {
@@ -13,13 +14,21 @@ export const ALL_ROUTES = [
   },
   {
     id: 2,
+    title: "Sidebar",
     path: "/components/sidebar",
     element: <Sidebar />,
   },
   {
     id: 3,
+    title: "Notifications",
     path: "/components/notifications",
     element: <NotificationsComponent />,
+  },
+  {
+    id: 4,
+    title: "Loader",
+    path: "/components/loader",
+    element: <LoaderComponent />,
   },
 ];
 
