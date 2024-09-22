@@ -1,14 +1,17 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from './navbar';
-import MainLayout from './MainLayout';
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import Navbar from "./navbar";
 
 export default function AppLayout() {
-    return (
-        <main className="custom_container">
-            <Navbar />
-            <MainLayout>
-                <Outlet />
-            </MainLayout>
-        </main>
-    );
+  const { pathname: currentActiveRoute } = useLocation();
+
+  if (currentActiveRoute === "/") {
+    return <Navigate to="/components/sidebar" />;
+  }
+
+  return (
+    <main className="custom_container">
+      <Navbar />
+      <Outlet />
+    </main>
+  );
 }
