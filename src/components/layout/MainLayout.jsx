@@ -42,7 +42,7 @@ export default function MainLayout({
     <div className="flex flex-col md:flex-row mt-10">
       <aside
         className={classNames(
-          "p-4 md:p-0 top-20 md:top-0 md:block fixed inset-y-0 left-0 z-50 w-64 overflow-y-auto  transition duration-200 ease-in-out md:relative md:translate-x-0",
+          "p-4 md:p-0 top-20 md:top-0 md:block fixed inset-y-0 left-0 z-50 w-64 overflow-y-auto  transition duration-200 ease-in-out md:relative md:translate-x-0  bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent",
           { "!hidden": !isSidebarOpen }
         )}
       >

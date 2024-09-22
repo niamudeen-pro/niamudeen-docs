@@ -35,7 +35,7 @@ export default function NotificationsComponent() {
         filename: "App.js",
       }}
     >
-      <div className="flex justify-center gap-5">
+      <div className="flex flex-col items-center sm:flex-row sm:justify-center gap-5">
         <button
           className="w-max cursor-pointer rounded-lg bg-black px-8 py-3 text-xs capitalize text-white shadow-lg transition-all duration-300 ease-in-out hover:bg-black/80 dark:bg-orange-500 dark:hover:bg-orange-500/80"
           onClick={handleSuccessNotification}
