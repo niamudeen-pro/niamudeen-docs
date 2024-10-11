@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-
 import { IoClose } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { GoGift } from "react-icons/go";
@@ -10,6 +8,7 @@ import { RiMenuFill } from "react-icons/ri";
 import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineLogout } from "react-icons/ai";
 import MainLayout from "../../components/layout/MainLayout";
+import { cn } from "../../utils";
 
 const NAVIGATION_MENUS = [
   {
@@ -80,8 +79,12 @@ export default function Sidebar() {
       link: "https://www.npmjs.com/package/framer-motion",
     },
     {
-      name: "npm install classnames",
-      link: "https://www.npmjs.com/package/classnames",
+      name: "npm install tailwind-merge",
+      link: "https://www.npmjs.com/package/tailwind-merge",
+    },
+    {
+      name: "npm install clsx",
+      link: "https://www.npmjs.com/package/clsx",
     },
   ];
 
@@ -92,6 +95,10 @@ export default function Sidebar() {
       codeSnippet={codeSnippet}
       packagesToInstalled={packagesToInstalled}
       filename="components/Sidebar.jsx"
+      codeSnippet2={{
+        snippet: codeSnippet2,
+        filename: "utils/index.jsx",
+      }}
     >
       <section className="flex min-h-screen text-white">
         <aside className="p-5 bg-orange-500">
@@ -144,7 +151,7 @@ export default function Sidebar() {
                 {NAVIGATION_MENUS?.map((menu) => (
                   <li
                     key={menu.id}
-                    className={classNames(
+                    className={cn(
                       "relative group flex gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300  hover:bg-white hover:text-black",
                       {
                         "justify-center": !isOpen,
@@ -175,7 +182,7 @@ export default function Sidebar() {
               </ul>
             </nav>
             <div
-              className={classNames(
+              className={cn(
                 "flex  gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300    absolute bottom-0 w-full hover:bg-white hover:text-black",
                 {
                   "justify-center": !isOpen,
@@ -211,8 +218,6 @@ export default function Sidebar() {
 }
 
 const codeSnippet = `import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-
 import { IoClose } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { GoGift } from "react-icons/go";
@@ -222,6 +227,7 @@ import { RiMenuFill } from "react-icons/ri";
 import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineLogout } from "react-icons/ai";
 import MainLayout from "../../components/layout/MainLayout";
+import { cn } from "../../utils";
 
 const NAVIGATION_MENUS = [
   {
@@ -333,7 +339,7 @@ export default function Sidebar() {
                 {NAVIGATION_MENUS?.map((menu) => (
                   <li
                     key={menu.id}
-                    className={classNames(
+                    className={cn(
                       "relative group flex gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300  hover:bg-white hover:text-black",
                       {
                         "justify-center": !isOpen,
@@ -364,7 +370,7 @@ export default function Sidebar() {
               </ul>
             </nav>
             <div
-              className={classNames(
+              className={cn(
                 "flex  gap-4 rounded-md py-3 px-4 items-center cursor-pointer transition-all duration-300    absolute bottom-0 w-full hover:bg-white hover:text-black",
                 {
                   "justify-center": !isOpen,
@@ -397,3 +403,11 @@ export default function Sidebar() {
       </section>
   );
 }`;
+
+const codeSnippet2 = `import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+`;

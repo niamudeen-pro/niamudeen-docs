@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MdContentCopy } from "react-icons/md";
@@ -8,6 +7,7 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { closeSidebar, toggleSidebar } from "../../store/features/sidebarSlice";
 import useWindowSize from "../../hooks/useWindowSize";
 import { ALL_ROUTES } from "../../routes";
+import { cn } from "../../utils";
 
 export default function MainLayout({
   children,
@@ -67,7 +67,7 @@ export default function MainLayout({
   return (
     <div className="flex flex-col md:flex-row mt-10">
       <aside
-        className={classNames(
+        className={cn(
           "p-4 md:p-0  md:top-0 md:block fixed inset-y-0 left-0 z-50 w-64 overflow-y-auto  transition duration-200 ease-in-out md:relative md:translate-x-0  bg-white dark:bg-black md:bg-transparent md:dark:bg-transparent",
           { "!hidden": !isSidebarOpen }
         )}
@@ -84,7 +84,7 @@ export default function MainLayout({
             COMPONENTS.map((section, index) => (
               <div key={index} className="mb-6">
                 <h2 className="mb-2 text-base font-medium">{section.title}</h2>
-                <ul>
+                <ul className="space-y-2">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex} className="mb-1">
                       <Link
@@ -196,7 +196,7 @@ function CodeSnippetTabContent({ snippet, filename, activeTab }) {
       {activeTab === "code" && (
         <div className="border-border border-2 p-5 rounded-md mb-6 max-h-[800px] overflow-y-auto hide_scrollbar">
           <div className="flex_between mb-6">
-            <p className="bg-gray-50 dark:bg-primary px-4 py-2 rounded-md">
+            <p className="bg-primary text-white px-4 py-2 rounded-md">
               {filename}
             </p>
             <MdContentCopy

@@ -5,6 +5,7 @@ import AppLayout from "../components/layout/AppLayout";
 import Sidebar from "../pages/components/Sidebar";
 import NotificationsComponent from "../pages/components/Notifications";
 import LoaderComponent from "../pages/components/Loader";
+import FormComponent from "../pages/components/Form";
 
 export const ALL_ROUTES = [
   {
@@ -29,6 +30,12 @@ export const ALL_ROUTES = [
     title: "Loader",
     path: "/components/loader",
     element: <LoaderComponent />,
+  },
+  {
+    id: 5,
+    title: "Form",
+    path: "/components/form",
+    element: <FormComponent />,
   },
 ];
 
