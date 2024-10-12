@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
-import AppLayout from "../components/layout/AppLayout";
 import Sidebar from "../pages/components/Sidebar";
-import NotificationsComponent from "../pages/components/Notifications";
-import LoaderComponent from "../pages/components/Loader";
 import FormComponent from "../pages/components/Form";
+import AppLayout from "../components/layout/AppLayout";
 import TableComponent from "../pages/components/Table";
+import ModalComponent from "../pages/components/Modal";
+import LoaderComponent from "../pages/components/Loader";
+import NotificationsComponent from "../pages/components/Notifications";
 
 export const ALL_ROUTES = [
   {
@@ -43,6 +44,12 @@ export const ALL_ROUTES = [
     title: "Table",
     path: "/components/table",
     element: <TableComponent />,
+  },
+  {
+    id: 7,
+    title: "Modal",
+    path: "/components/modal",
+    element: <ModalComponent />,
   },
 ];
 

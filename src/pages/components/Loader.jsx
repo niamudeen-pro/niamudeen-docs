@@ -1,17 +1,23 @@
-import React from "react";
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/layout/main-layout";
 
 export default function LoaderComponent() {
+  const codeSnippetList = [
+    {
+      id: 1,
+      code: codeSnippet,
+      filename: "components/Loader.jsx",
+    },
+    {
+      id: 2,
+      code: codeSnippet2,
+      filename: "style.css",
+    },
+  ];
   return (
     <MainLayout
       title="Loader"
       description="Bring your app to life with our sleek and stylish Loader Component! Keep users engaged while content loads seamlessly in the background. No more boring wait times – just smooth, modern animations that fit any design. Elevate your user experience effortlessly!"
-      codeSnippet={codeSnippet}
-      filename="components/Loader.jsx"
-      codeSnippet2={{
-        snippet: codeSnippet2,
-        filename: "style.css",
-      }}
+      codeSnippetList={codeSnippetList}
     >
       <section className="h-[400px] w-full flex_center">
         <div className="flex space-x-2 customLoader">

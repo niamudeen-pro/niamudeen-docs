@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { IoClose } from "react-icons/io5";
-import { RxDashboard } from "react-icons/rx";
-import { GoGift } from "react-icons/go";
-import { ImFilesEmpty } from "react-icons/im";
-import { IoSettingsOutline } from "react-icons/io5";
-import { RiMenuFill } from "react-icons/ri";
+
 import { AnimatePresence, motion } from "framer-motion";
+
+import { GoGift } from "react-icons/go";
+import { IoClose } from "react-icons/io5";
+import { RiMenuFill } from "react-icons/ri";
+import { RxDashboard } from "react-icons/rx";
+import { ImFilesEmpty } from "react-icons/im";
 import { AiOutlineLogout } from "react-icons/ai";
-import MainLayout from "../../components/layout/MainLayout";
+import { IoSettingsOutline } from "react-icons/io5";
+
 import { cn } from "../../utils";
+import MainLayout from "../../components/layout/main-layout";
 
 const NAVIGATION_MENUS = [
   {
@@ -69,7 +72,7 @@ export default function Sidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.innerWidth]);
 
-  const packagesToInstalled = [
+  const PACKAGES = [
     {
       name: "npm install react-icons",
       link: "https://react-icons.github.io/react-icons/",
@@ -88,17 +91,25 @@ export default function Sidebar() {
     },
   ];
 
+  const codeSnippetList = [
+    {
+      id: 1,
+      code: codeSnippet,
+      filename: "components/Sidebar.jsx",
+    },
+    {
+      id: 2,
+      code: codeSnippet2,
+      filename: "utils/index.jsx",
+    },
+  ];
+
   return (
     <MainLayout
       title="Sidebar"
       description="Elevate your application's user experience with our cutting-edge sidebar component. Seamlessly integrate this advanced feature into your project to enhance navigation, organize content, and boost accessibility. Whether you're building a complex dashboard or a simple app, our sidebar adapts to your needs, providing a sleek and intuitive interface. Discover endless customization options, responsive design, and performance optimization—all in one powerful component. Transform the way users interact with your app and make navigation a breeze!"
-      codeSnippet={codeSnippet}
-      packagesToInstalled={packagesToInstalled}
-      filename="components/Sidebar.jsx"
-      codeSnippet2={{
-        snippet: codeSnippet2,
-        filename: "utils/index.jsx",
-      }}
+      packages={PACKAGES}
+      codeSnippetList={codeSnippetList}
     >
       <section className="flex min-h-screen text-white">
         <aside className="p-5 bg-orange-500">

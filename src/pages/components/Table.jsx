@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { GrFormPrevious } from "react-icons/gr";
-import { GrFormNext } from "react-icons/gr";
+import { IoChevronForward } from "react-icons/io5";
 import { useDebounce } from "../../hooks/useDebounce";
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/layout/main-layout";
+import { IoChevronBackOutline } from "react-icons/io5";
 
 export default function TableComponent() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,15 +95,15 @@ export default function TableComponent() {
   const PAGINATED_DATA = FILTERD_DATA.slice(startIndex, endIndex);
   const TOTAL_PAGES = Math.ceil(FILTERD_DATA.length / itemPerPage);
 
-  const packagesToInstalled = [];
+  const codeSnippetList = [
+    {
+      id: 1,
+      code: codeSnippet,
+      filename: "components/Table.jsx",
+    },
+  ];
   return (
-    <MainLayout
-      title="Table"
-      description=""
-      codeSnippet={codeSnippet}
-      packagesToInstalled={packagesToInstalled}
-      filename="components/Table.jsx"
-    >
+    <MainLayout title="Table" codeSnippetList={codeSnippetList}>
       <div className="overflow-auto space-y-6">
         <div>
           <SearchComponent
@@ -188,7 +188,7 @@ function Pagination({ currentPage, setCurrentPage, TOTAL_PAGES }) {
         className="p-2 bg-orange-500 rounded-md hover:bg-orange-600 cursor-pointer"
         onClick={handlePrev}
       >
-        <GrFormPrevious size={22} className="text-white" />
+        <IoChevronBackOutline size={18} className="text-white" />
       </button>
       <p className="capitalize">
         page {currentPage} of {TOTAL_PAGES}
@@ -198,7 +198,7 @@ function Pagination({ currentPage, setCurrentPage, TOTAL_PAGES }) {
         disabled={currentPage === TOTAL_PAGES}
         onClick={handleNext}
       >
-        <GrFormNext size={22} />
+        <IoChevronForward size={18} className="text-white" />
       </button>
     </div>
   );
@@ -207,7 +207,6 @@ const codeSnippet = `import React, { useState } from "react";
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
 import { useDebounce } from "../../hooks/useDebounce";
-import MainLayout from "../../components/layout/MainLayout";
 
 export default function TableComponent() {
   const [currentPage, setCurrentPage] = useState(1);

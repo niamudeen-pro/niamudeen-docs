@@ -1,7 +1,8 @@
-import MainLayout from "../../components/layout/MainLayout";
-import { useForm } from "react-hook-form";
-import { FORMINPUT_LIST } from "../../constants";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+import { FORMINPUT_LIST } from "../../constants";
+import MainLayout from "../../components/layout/main-layout";
 import FormFieldError from "../../components/shared/FormFieldError";
 
 export default function FormComponent() {
@@ -11,7 +12,25 @@ export default function FormComponent() {
     formState: { errors },
   } = useForm();
 
-  const packagesToInstalled = [
+  const codeSnippetList = [
+    {
+      id: 1,
+      code: codeSnippet,
+      filename: "components/LoginForm.jsx",
+    },
+    {
+      id: 2,
+      code: codeSnippet2,
+      filename: "constants/index.js",
+    },
+    {
+      id: 3,
+      code: codeSnippet3,
+      filename: "components/shared/FormFieldError.jsx",
+    },
+  ];
+
+  const PACKAGES = [
     {
       name: "npm install react-hook-form",
       link: "https://www.npmjs.com/package/react-hook-form",
@@ -28,18 +47,8 @@ export default function FormComponent() {
   return (
     <MainLayout
       title="Form"
-      description=""
-      codeSnippet={codeSnippet}
-      packagesToInstalled={packagesToInstalled}
-      filename="components/LoginForm.jsx"
-      codeSnippet2={{
-        snippet: codeSnippet2,
-        filename: "constants/index.js",
-      }}
-      codeSnippet3={{
-        snippet: codeSnippet3,
-        filename: "components/shared/FormFieldError.jsx",
-      }}
+      packages={PACKAGES}
+      codeSnippetList={codeSnippetList}
     >
       <section className="mx-auto max-w-[1200px] px-4 overflow-hidden flex_center">
         <form

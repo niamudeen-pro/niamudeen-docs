@@ -1,14 +1,7 @@
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/layout/main-layout";
 import { sendNotification } from "../../utils/notifications";
 
 export default function NotificationsComponent() {
-  const packagesToInstalled = [
-    {
-      name: "npm install react-toastify",
-      link: "https://www.npmjs.com/package/react-toastify",
-    },
-  ];
-
   const handleSuccessNotification = () => {
     sendNotification("success", "Notification sent successfully");
   };
@@ -19,21 +12,35 @@ export default function NotificationsComponent() {
     sendNotification("error", "Notification sent successfully");
   };
 
+  const codeSnippetList = [
+    {
+      id: 1,
+      code: codeSnippet,
+      filename: "utils/notifications.js",
+    },
+    {
+      id: 2,
+      code: codeSnippet2,
+      filename: "Notifications.jsx",
+    },
+    {
+      id: 3,
+      code: codeSnippet3,
+      filename: "App.js",
+    },
+  ];
+  const PACKAGES = [
+    {
+      name: "npm install react-toastify",
+      link: "https://www.npmjs.com/package/react-toastify",
+    },
+  ];
   return (
     <MainLayout
       title="Notifications"
       description="Make every message count with our vibrant notification component, designed to catch your users' attention. Featuring eye-catching icons and a sleek design, this component effortlessly handles a variety of message types—from success and error alerts to informational updates. Customize alerts to fit your brand, ensuring your users are always in the loop with clear, concise, and engaging notifications. Elevate your app’s communication strategy and keep your audience informed, all while enhancing the overall user experience!"
-      codeSnippet={codeSnippet}
-      packagesToInstalled={packagesToInstalled}
-      filename="utils/notifications.js"
-      codeSnippet2={{
-        snippet: codeSnippet2,
-        filename: "Notifications.jsx",
-      }}
-      codeSnippet3={{
-        snippet: codeSnippet3,
-        filename: "App.js",
-      }}
+      packages={PACKAGES}
+      codeSnippetList={codeSnippetList}
     >
       <div className="flex flex-col items-center sm:flex-row sm:justify-center gap-5">
         <button
