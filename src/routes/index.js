@@ -6,6 +6,7 @@ import Sidebar from "../pages/components/Sidebar";
 import NotificationsComponent from "../pages/components/Notifications";
 import LoaderComponent from "../pages/components/Loader";
 import FormComponent from "../pages/components/Form";
+import TableComponent from "../pages/components/Table";
 
 export const ALL_ROUTES = [
   {
@@ -36,6 +37,12 @@ export const ALL_ROUTES = [
     title: "Form",
     path: "/components/form",
     element: <FormComponent />,
+  },
+  {
+    id: 6,
+    title: "Table",
+    path: "/components/table",
+    element: <TableComponent />,
   },
 ];
 

@@ -41,7 +41,7 @@ export default function FormComponent() {
         filename: "components/shared/FormFieldError.jsx",
       }}
     >
-      <section className="mx-auto max-w-[1200px] px-4 overflow-hidden min-h-[800px] flex_center">
+      <section className="mx-auto max-w-[1200px] px-4 overflow-hidden flex_center">
         <form
           className="max-w-[400px] min-h-[500px] mx-auto text-lg p-14 rounded-xl space-y-8 shadow-lg dark:border-border dark:border-2"
           onSubmit={handleSubmit(onSubmit)}
@@ -104,7 +104,7 @@ export default function FormComponent() {
   };
 
   return (
-      <section className="mx-auto max-w-[1200px] px-4 overflow-hidden min-h-[800px] flex_center">
+      <section className="mx-auto max-w-[1200px] px-4 overflow-hidden flex_center">
         <form
           className="max-w-[400px] min-h-[500px] mx-auto text-lg p-14 rounded-xl space-y-8 shadow-lg dark:border-border dark:border-2"
           onSubmit={handleSubmit(onSubmit)}

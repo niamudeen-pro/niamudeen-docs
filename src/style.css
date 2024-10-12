@@ -54,7 +54,7 @@ p {
   }
 
   .custom_input {
-    @apply w-full rounded-md border border-gray-200 py-2 pl-4;
+    @apply w-full rounded-md border border-gray-200 py-2 pl-4 text-black dark:outline-none;
   }
 
   .btn {
